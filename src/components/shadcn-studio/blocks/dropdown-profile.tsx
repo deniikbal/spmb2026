@@ -25,9 +25,14 @@ type Props = {
   trigger: ReactNode
   defaultOpen?: boolean
   align?: 'start' | 'center' | 'end'
+  user?: {
+    name: string
+    email: string
+    image?: string | null
+  } | null
 }
 
-const ProfileDropdown = ({ trigger, defaultOpen, align = 'end' }: Props) => {
+const ProfileDropdown = ({ trigger, defaultOpen, align = 'end', user }: Props) => {
   return (
     <DropdownMenu defaultOpen={defaultOpen}>
       <DropdownMenuTrigger asChild>{trigger}</DropdownMenuTrigger>
@@ -35,14 +40,16 @@ const ProfileDropdown = ({ trigger, defaultOpen, align = 'end' }: Props) => {
         <DropdownMenuLabel className='flex items-center gap-4 px-4 py-2.5 font-normal'>
           <div className='relative'>
             <Avatar className='size-10'>
-              <AvatarImage src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-1.png' alt='John Doe' />
-              <AvatarFallback>JD</AvatarFallback>
+              <AvatarImage src={user?.image || ''} alt={user?.name || ''} />
+              <AvatarFallback className="bg-emerald-100 text-emerald-700 font-bold">
+                {user?.name?.[0]?.toUpperCase() || 'U'}
+              </AvatarFallback>
             </Avatar>
             <span className='ring-card absolute right-0 bottom-0 block size-2 rounded-full bg-green-600 ring-2' />
           </div>
           <div className='flex flex-1 flex-col items-start'>
-            <span className='text-foreground text-lg font-semibold'>John Doe</span>
-            <span className='text-muted-foreground text-base'>john.doe@example.com</span>
+            <span className='text-foreground text-lg font-semibold'>{user?.name || 'User'}</span>
+            <span className='text-muted-foreground text-base'>{user?.email || 'user@example.com'}</span>
           </div>
         </DropdownMenuLabel>
 

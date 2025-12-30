@@ -35,6 +35,7 @@ import LanguageDropdown from '@/components/shadcn-studio/blocks/dropdown-languag
 import ProfileDropdown from '@/components/shadcn-studio/blocks/dropdown-profile'
 import { Link, useLocation } from '@tanstack/react-router'
 import React from 'react'
+import { authClient } from '../../../lib/auth-client'
 
 interface DashboardLayoutProps {
     children: React.ReactNode
@@ -42,6 +43,8 @@ interface DashboardLayoutProps {
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
     const location = useLocation()
+    const { data: session } = authClient.useSession()
+    const user = session?.user
     const pathnames = location.pathname.split('/').filter((x) => x)
 
     return (
@@ -135,11 +138,14 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                                     }
                                 />
                                 <ProfileDropdown
+                                    user={user}
                                     trigger={
                                         <Button variant="ghost" size="icon" className="size-9.5">
                                             <Avatar className="size-9.5 rounded-md">
-                                                <AvatarImage src="https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-1.png" />
-                                                <AvatarFallback>JD</AvatarFallback>
+                                                <AvatarImage src={user?.image || ''} />
+                                                <AvatarFallback className="bg-emerald-100 text-emerald-700 font-bold">
+                                                    {user?.name?.[0]?.toUpperCase() || 'U'}
+                                                </AvatarFallback>
                                             </Avatar>
                                         </Button>
                                     }
