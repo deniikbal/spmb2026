@@ -25,6 +25,7 @@ import {
     ChartNoAxesCombinedIcon,
     CrownIcon,
     FacebookIcon,
+    GraduationCapIcon,
     InstagramIcon,
     LanguagesIcon,
     LinkedinIcon,
@@ -84,6 +85,18 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                                             <Link to="/users">
                                                 <UsersIcon />
                                                 <span>User Management</span>
+                                            </Link>
+                                        </SidebarMenuButton>
+                                    </SidebarMenuItem>
+                                    <SidebarMenuItem>
+                                        <SidebarMenuButton
+                                            asChild
+                                            isActive={location.pathname === '/students'}
+                                            className="data-[active=true]:bg-emerald-50 data-[active=true]:text-emerald-700 hover:text-emerald-700 hover:bg-emerald-50/50"
+                                        >
+                                            <Link to="/students">
+                                                <GraduationCapIcon />
+                                                <span>Data Siswa</span>
                                             </Link>
                                         </SidebarMenuButton>
                                     </SidebarMenuItem>

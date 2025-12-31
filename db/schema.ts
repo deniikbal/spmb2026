@@ -95,3 +95,44 @@ export const accountRelations = relations(account, ({ one }) => ({
         references: [user.id],
     }),
 }));
+
+export const student = pgTable("student", {
+    id: text("id").primaryKey(),
+    // Identitas
+    nis: text("nis"),
+    nisn: text("nisn"),
+    nmSiswa: text("nm_siswa").notNull(),
+    tempatLahir: text("tempat_lahir"),
+    tanggalLahir: text("tanggal_lahir"),
+    jenisKelamin: text("jenis_kelamin"),
+    agama: text("agama"),
+    alamatSiswa: text("alamat_siswa"),
+    teleponSiswa: text("telepon_siswa"),
+    diterimaTanggal: text("diterima_tanggal"),
+    // Data Orang Tua / Wali
+    nmAyah: text("nm_ayah"),
+    nmIbu: text("nm_ibu"),
+    pekerjaanAyah: text("pekerjaan_ayah"),
+    pekerjaanIbu: text("pekerjaan_ibu"),
+    nmWali: text("nm_wali"),
+    pekerjaanWali: text("pekerjaan_wali"),
+    alamatOrtu: text("alamat_ortu"),
+    teleponOrtu: text("telepon_ortu"),
+    alamatWali: text("alamat_wali"),
+    teleponWali: text("telepon_wali"),
+    // Detail Pelengkap
+    statusDalamKel: text("status_dalam_kel"),
+    anakKe: text("anak_ke"),
+    sekolahAsal: text("sekolah_asal"),
+    diterimaKelas: text("diterima_kelas"),
+    fotoSiswa: text("foto_siswa"),
+    noIjasahnas: text("no_ijasahnas"),
+    tglLulus: text("tgl_lulus"),
+    noTranskrip: text("no_transkrip"),
+    // Timestamps
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at")
+        .defaultNow()
+        .$onUpdate(() => /* @__PURE__ */ new Date())
+        .notNull(),
+});
