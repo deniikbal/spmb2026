@@ -1,8 +1,0 @@
-[build]
-  command = "pnpm run build"
-  publish = "dist"
-
-[functions]
-  directory = ".netlify/functions-internal"
-  node_bundler = "nft"
-  included_files = [".netlify/functions-internal/**"]
