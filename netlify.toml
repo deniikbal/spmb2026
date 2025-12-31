@@ -2,9 +2,8 @@
   command = "pnpm run build"
   publish = "dist"
 
-[build.environment]
-  NODE_VERSION = "20"
-  PNPM_FLAGS = "--no-frozen-lockfile"
+[functions]
+  directory = ".netlify/functions-internal"
 
 [[redirects]]
   from = "/*"
